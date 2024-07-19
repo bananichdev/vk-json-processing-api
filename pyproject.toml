@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "vk-json-processing-api"
+version = "0.1.0"
+description = ""
+authors = ["bananichdev <dimitri-05@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "0.110.0"
+pydantic = "1.10"
+uvicorn = "^0.30.1"
+
+[tool.poetry.group.security.dependencies]
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.parse.dependencies]
+pyyaml = "^6.0.1"
+jsonschema = "^4.23.0"
+gitpython = "^3.1.43"
+
+[tool.poetry.group.database.dependencies]
+sqlalchemy = "2.0.30"
+psycopg2-binary = "^2.9.9"
+asyncpg = "^0.29.0"
+alembic = "1.13.0"
+
+[tool.poetry.group.lint.dependencies]
+black = "^24.4.2"
+isort = "^5.13.2"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+extend_skip = ["migrations"]
+skip_gitignore = true
+
+[tool.black]
+line-length = 100
+extend-exclude = "migrations"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
