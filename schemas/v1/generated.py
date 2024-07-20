@@ -3,8 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 
-class Person(BaseModel):
-	name: str
-	age: int
-	email: Optional[str]
+class Document(BaseModel):
+	title: Optional[str]
+	pages: Optional[int]
 	is_active: Optional[bool]

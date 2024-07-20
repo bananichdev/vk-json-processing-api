@@ -8,14 +8,14 @@ from database.controllers.app import get_app
 from database.models import AppModel
 from schemas.v1.app import AppOperationOK
 from schemas.v1.errors import DBAPICallError
-from schemas.v1.generated import Person
+from schemas.v1.generated import Document
 
 
 async def update_app_json(
     db_sessionmaker: async_sessionmaker,
     kind: str,
     app_id: UUID,
-    new_json: Person,
+    new_json: Document,
 ) -> AppOperationOK:
     await get_app(
         db_sessionmaker=db_sessionmaker,

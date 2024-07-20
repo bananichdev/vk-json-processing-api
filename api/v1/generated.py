@@ -8,7 +8,7 @@ from database.connection import get_db_sessionmaker
 from database.controllers.generated import update_app_json
 from kafka import send_message
 from schemas.v1.app import AppOperationOK
-from schemas.v1.generated import Person
+from schemas.v1.generated import Document
 
 router = APIRouter()
 
@@ -18,7 +18,7 @@ async def save_json_handler(
     db_sessionmaker: Annotated[async_sessionmaker, Depends(get_db_sessionmaker)],
     kind: str,
     app_id: UUID,
-    new_json: Person,
+    new_json: Document,
 ) -> AppOperationOK:
     response = await update_app_json(
         db_sessionmaker=db_sessionmaker,
