@@ -12,4 +12,4 @@ def git_commit_and_tag(tag: str, message: str):
     repo.git.push("master", tag)
 
 
-git_commit_and_tag("master", "master")
+git_commit_and_tag("init", "master")
