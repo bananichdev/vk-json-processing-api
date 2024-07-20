@@ -4,20 +4,20 @@ export PYTHONPATH=$(pwd)
 
 poetry run python cli/init.py
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to run init.py"
+    echo "Ошибка во время выполнения init.py"
     exit 1
 fi
 
 poetry run python cli/generate_models.py
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to run generate_models.py"
+    echo "Ошибка во время выполнения generate_models.py"
     exit 1
 fi
 
 poetry run python cli/generate_rest.py
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to run generate_rest.py"
+    echo "Ошибка во время выполнения generate_rest.py"
     exit 1
 fi
 
-echo "All commands executed successfully"
+echo "Все команды выполнены успешно"

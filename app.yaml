@@ -1,4 +1,4 @@
-kind: new_application
+kind: main_application
 name: hello-world
 description: Hello World application
 version: 0.1.0
