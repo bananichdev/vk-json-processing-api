@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from settings import CONTROLLER_PATH, REST_PATH
+from utils.git_repo import git_commit_and_tag
 from utils.json_parser import parse_json
 
 
@@ -97,17 +100,21 @@ async def save_json_handler(
 
 
 def main():
-    schema = parse_json()
+    model_name = parse_json()["title"]
 
     print(f"Генерация контроллеров базы данных в {CONTROLLER_PATH} ...")
     with open(CONTROLLER_PATH, "w") as f:
-        f.write(generate_controller(schema["title"]))
+        f.write(generate_controller(model_name))
     print("Генерация прошла успешно!")
 
     print(f"Генерация контроллеров REST приложения в {REST_PATH} ...")
     with open(REST_PATH, "w") as f:
-        f.write(generate_rest(schema["title"]))
+        f.write(generate_rest(model_name))
     print("Генерация прошла успешно!")
+
+    tag = f"{model_name.lower()}-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    message = f"feat: Generated {model_name} model and FastAPI endpoints"
+    git_commit_and_tag(tag=tag, message=message)
 
 
 if __name__ == "__main__":
