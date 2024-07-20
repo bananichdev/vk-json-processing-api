@@ -4,8 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.v1 import app as api_v1
 from settings import ALLOW_ORIGIN, HOST, PORT
+from utils.lifespan import lifespan
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 app.mount("/api/v1/", api_v1)
 
 app.add_middleware(

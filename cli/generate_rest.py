@@ -57,25 +57,41 @@ from sqlalchemy.ext.asyncio import async_sessionmaker
 
 from database.connection import get_db_sessionmaker
 from database.controllers.generated import update_app_json
+from kafka import send_message
 from schemas.v1.app import AppOperationOK
 from schemas.v1.generated import {model_name}
 
-router = APIRouter()""" + """
+router = APIRouter()"""
+        + """
 
 
-@router.post("/{kind}/{app_id}")""" + f"""
+@router.post("/{kind}/{app_id}")"""
+        + f"""
 async def save_json_handler(
     db_sessionmaker: Annotated[async_sessionmaker, Depends(get_db_sessionmaker)],
     kind: str,
     app_id: UUID,
     new_json: {model_name},
-) -> AppOperationOK:
-    return await update_app_json(
+) -> AppOperationOK:""" + """
+    response = await update_app_json(
         db_sessionmaker=db_sessionmaker,
         kind=kind,
         app_id=app_id,
         new_json=new_json,
     )
+
+    await send_message(
+        topic="app_updates",
+        key=str(app_id),
+        value={
+            "event": "json saved",
+            "kind": kind,
+            "app_id": str(app_id),
+            "new_json": new_json.dict(),
+        },
+    )
+
+    return response
     """
     )
 

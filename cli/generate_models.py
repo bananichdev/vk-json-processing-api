@@ -13,9 +13,7 @@ def parse_property(prop: str, details: dict[str, Any], required: bool) -> str:
     type_annotation = "Any"
 
     if prop_type == "string":
-        if details.get("format") == "email":
-            type_annotation = "Optional[EmailStr]" if optional else "EmailStr"
-        elif details.get("format") == "date-time":
+        if details.get("format") == "date-time":
             type_annotation = "Optional[datetime]" if optional else "datetime"
         elif details.get("format") == "uri":
             type_annotation = "Optional[AnyUrl]" if optional else "AnyUrl"
@@ -63,7 +61,7 @@ def main():
 
     print(f"Генерация моделей в {MODELS_PATH} ...")
     with open(MODELS_PATH, "w") as f:
-        f.write("from pydantic import BaseModel, EmailStr, AnyUrl\n")
+        f.write("from pydantic import BaseModel, AnyUrl\n")
         f.write("from typing import Optional\n")
         f.write("from datetime import datetime\n\n\n")
         f.write(model_code)

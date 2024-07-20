@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, AnyUrl
+from pydantic import BaseModel, AnyUrl
 from typing import Optional
 from datetime import datetime
 
@@ -6,5 +6,5 @@ from datetime import datetime
 class Person(BaseModel):
 	name: str
 	age: int
-	email: Optional[EmailStr]
+	email: Optional[str]
 	is_active: Optional[bool]

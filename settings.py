@@ -41,11 +41,18 @@ def get_absolute_controller_path():
     return os.path.abspath(yaml_path)
 
 
+def get_absolute_git_path():
+    current_file_path = os.path.abspath(__file__)
+    current_dir = os.path.dirname(current_file_path)
+    return current_dir
+
+
 YAML_PATH = get_absolute_yaml_path()
 SCHEMA_PATH = get_absolute_schema_path()
 MODELS_PATH = get_absolute_models_path()
 REST_PATH = get_absolute_rest_path()
 CONTROLLER_PATH = get_absolute_controller_path()
+GIT_PATH = get_absolute_git_path()
 yaml_data = parse(YAML_PATH)
 
 JSON_SCHEMA_META = {
@@ -73,6 +80,8 @@ DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 DB_URL = os.environ.get("DB_URL")
 DB_NAME = os.environ.get("DB_NAME")
+
+KAFKA_BOOTSTRAP_SERVERS = os.environ.get("KAFKA_BOOTSTRAP_SERVERS")
 
 ALLOW_ORIGIN = "http://localhost"
 

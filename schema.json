@@ -10,8 +10,7 @@
       "type": "integer"
     },
     "email": {
-      "type": "string",
-      "format": "email"
+      "type": "string"
     },
     "is_active": {
       "type": "boolean"
