@@ -31,3 +31,8 @@ poetry run alembic upgrade head
 ```shell
 poetry run python main.py
 ```
+
+# K8S
+Предложенные файлы для запуска сервиса находятся в папке k8s
+
+В ближайшем будущем планируется добавить docker compose для автосборки сервиса

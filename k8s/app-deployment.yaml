@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DB_USER
+              value: "admin"
+            - name: DB_PASS
+              value: "admin_password"
+            - name: DB_URL
+              value: "database-statefulset-0.database-service.default.svc.cluster.local"
+            - name: DB_NAME
+              value: "vk-json-processing-api"
+  selector:
+    matchLabels:
+      app: app
