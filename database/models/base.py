@@ -7,7 +7,11 @@ class BaseModel:
         res_dict = {}
 
         for column in self.__table__.columns:
-            if not exclude or column.name not in exclude:
+            if column.name == "json":
+                res_dict[column.name] = (
+                    getattr(self, column.name) if getattr(self, column.name) else None
+                )
+            elif not exclude or column.name not in exclude:
                 res_dict[column.name] = (
                     str(getattr(self, column.name)) if getattr(self, column.name) else None
                 )
